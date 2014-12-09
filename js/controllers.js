@@ -12,7 +12,7 @@ angular.module('myApp.controllers', [])
 
 })
 
-.controller('FlashCtrl', function ($scope) {
+.controller('FlashCtrl', function ($scope, $modal) {
 
 	// Array Remove - authored by John Resig (MIT Licensed)
 	Array.prototype.remove = function(from, to) {
@@ -33,6 +33,19 @@ angular.module('myApp.controllers', [])
 		}
 
 		return id;
+	};
+
+	$scope.open = function() {
+		var modalInstance = $modal.open({
+			templateUrl: 'flashmodalcontent.html',
+			controller: 'FlashCtrl',
+			resolve: {
+				flashcards: function() {
+					return $scope.flashcards;
+				}
+			}
+		});
+
 	};
 
 	$scope.selectedFlashcard = null;	
