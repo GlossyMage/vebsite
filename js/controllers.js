@@ -42,7 +42,8 @@ angular.module('myApp.controllers', [])
 			'id': id,
 			'name': 'New flashcard ' + id,
 			'front': '',
-			'back': ''
+			'back': '',
+			'answer': ''
 		};
 
 		$scope.flashcards.push(newFlashcard);
@@ -59,7 +60,7 @@ angular.module('myApp.controllers', [])
 
 })
 
-/*angular.module('ui.bootstrap.modal')*/.controller('ModalCtrl', function($scope, $modal) {
+.controller('ModalCtrl', function($scope, $modal) {
 	
 	$scope.open = function() {
 		if ($scope.flashcards.length < 1) {
@@ -67,7 +68,12 @@ angular.module('myApp.controllers', [])
 			return;
 		};
 
-		console.log(Math.random() * $scope.flashcards.length);
+		for (var i = 0; i < $scope.flashcards.length; i++) {
+			if ($scope.flashcards[i].name === '' || $scope.flashcards[i].front === '' || $scope.flashcards[i].back === '') {
+				alert("It seems at least one of your flashcards has one or more empty fields. Might want to fix that.");
+				return;
+			}
+		}
 
 		$scope.selectedFlashcard = $scope.flashcards[Math.floor((Math.random() * $scope.flashcards.length))];
 
@@ -90,9 +96,25 @@ angular.module('myApp.controllers', [])
 
 	$scope.flashcards = flashcards;
 	$scope.selectedFlashcard = selectedFlashcard;
+	$scope.stage = 1;
+	$scope.success = false;
+
+	$scope.submit = function() {
+		if ($scope.selectedFlashcard.answer === $scope.selectedFlashcard.back) {
+			$scope.success = true;
+		} else {
+			$scope.success = false;
+		}
+		$scope.selectedFlashcard.answer = "";
+		$scope.stage = 2;
+	}
+
+	$scope.again = function() {
+		$scope.stage = 1;
+		$scope.selectedFlashcard = $scope.flashcards[Math.floor((Math.random() * $scope.flashcards.length))];
+	}
 
 	$scope.close = function() {
-		console.log("Flashcards: " + JSON.stringify($scope.flashcards));
 		$modalInstance.dismiss();
 	}
 });

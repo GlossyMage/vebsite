@@ -56,13 +56,18 @@ overflow-y: scroll;
 			<h3 class="modal-title">Flashcards</h3>
 		</div>
 		<div class="modal-body">
-			<h3>Your random flashcard is</h3>
-			<br />
-			{{selectedFlashcard.name}}
-			<br />
-			{{selectedFlashcard.front}}
-			<br />
-			{{selectedFlashcard.back}}
+			<div ng-show="stage === 1">
+				<h3>{{selectedFlashcard.name}} - {{selectedFlashcard.front}}</h3>
+				<br />
+				<textarea style="resize:none" cols="30" rows="5" placeholder="What is on the back of this card?" ng-model="selectedFlashcard.answer"></textarea>
+				<br />
+				<button class="btn btn-default" ng-click="submit(answer)">Submit</button>
+			</div>
+			<div ng-show="stage === 2">
+				<h3 ng-show="success">Correct!</h3>
+				<h3 ng-show="!success">Wrong. The answer is {{selectedFlashcard.back}}.</h3>
+				<button class="btn btn-default" ng-click="again()">Again?</button>
+			</div>
 		</div>
 		<div class="modal-footer">
 			<button class="btn btn-default" ng-click="close()">Close</button>
