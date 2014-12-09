@@ -37,9 +37,10 @@ angular.module('myApp.controllers', [])
 	};
 
 	$scope.createFlashcard = function() {
+		var id = $scope.findHighestId()+1;
 		var newFlashcard = {
-			'id': $scope.findHighestId()+1,
-			'name': 'New flashcard',
+			'id': id,
+			'name': 'New flashcard ' + id,
 			'front': '',
 			'back': ''
 		};
@@ -61,14 +62,37 @@ angular.module('myApp.controllers', [])
 /*angular.module('ui.bootstrap.modal')*/.controller('ModalCtrl', function($scope, $modal) {
 	
 	$scope.open = function() {
+		if ($scope.flashcards.length < 1) {
+			alert("Make some flashcards first.");
+			return;
+		};
+
+		console.log(Math.random() * $scope.flashcards.length);
+
+		$scope.selectedFlashcard = $scope.flashcards[Math.floor((Math.random() * $scope.flashcards.length))];
+
 		var modalInstance = $modal.open({
 			templateUrl: 'flashmodalcontent.html',
-			controller: 'FlashCtrl',
+			controller: 'ModalInstanceCtrl',
 			resolve: {
 				flashcards: function() {
 					return $scope.flashcards;
+				},
+				selectedFlashcard: function() {
+					return $scope.selectedFlashcard;
 				}
 			}
 		});
 	};
+})
+
+.controller('ModalInstanceCtrl', function($scope, $modalInstance, flashcards, selectedFlashcard) {
+
+	$scope.flashcards = flashcards;
+	$scope.selectedFlashcard = selectedFlashcard;
+
+	$scope.close = function() {
+		console.log("Flashcards: " + JSON.stringify($scope.flashcards));
+		$modalInstance.dismiss();
+	}
 });
