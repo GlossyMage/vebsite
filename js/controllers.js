@@ -4,15 +4,9 @@ angular.module('myApp.controllers', [])
 .controller('MainCtrl', function ($scope) {
 	$scope.hello = "World";
 
-
-
-
-
-
-
 })
 
-.controller('FlashCtrl', function ($scope, $modal) {
+.controller('FlashCtrl', function ($scope) {
 
 	// Array Remove - authored by John Resig (MIT Licensed)
 	Array.prototype.remove = function(from, to) {
@@ -35,18 +29,6 @@ angular.module('myApp.controllers', [])
 		return id;
 	};
 
-	$scope.open = function() {
-		var modalInstance = $modal.open({
-			templateUrl: 'flashmodalcontent.html',
-			controller: 'FlashCtrl',
-			resolve: {
-				flashcards: function() {
-					return $scope.flashcards;
-				}
-			}
-		});
-
-	};
 
 	$scope.selectedFlashcard = null;	
 
@@ -74,4 +56,19 @@ angular.module('myApp.controllers', [])
 		$scope.selectedFlashcard = index > 0 ? $scope.flashcards[index-1] : $scope.flashcards[index];
 	};
 
+})
+
+/*angular.module('ui.bootstrap.modal')*/.controller('ModalCtrl', function($scope, $modal) {
+	
+	$scope.open = function() {
+		var modalInstance = $modal.open({
+			templateUrl: 'flashmodalcontent.html',
+			controller: 'FlashCtrl',
+			resolve: {
+				flashcards: function() {
+					return $scope.flashcards;
+				}
+			}
+		});
+	};
 });

@@ -3,6 +3,8 @@
 angular.module('myApp', [
 	'ngRoute',
 	'myApp.controllers',
+	'ui.bootstrap',
+	'ui.bootstrap.modal',
 	'ngResource',
 ]).
 config(['$routeProvider', function($routeProvider, RestangularProvider) {
