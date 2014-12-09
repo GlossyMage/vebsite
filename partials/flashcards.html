@@ -35,7 +35,17 @@ overflow-y: scroll;
 			<button class="btn btn-default" type="button" ng-click="deleteFlashcard()">Delete</button>
 		</div>
 	</div>
-	<div class="col-sm-4">
-			This is where you will be able to edit individual cards.
+	<div class="col-sm-6">
+		<div class="panel panel-default">
+			<div class="panel-heading">Details</div>
+			<div class="input-group">
+				<span class="input-group-addon"></span>
+				<input type="text" class="form-control" placeholder="Flashcard name" ng-model="selectedFlashcard.name" />
+			</div>
+			<div class="panel-body">
+				<textarea style="resize:none" cols="30" rows="5" placeholder="Front of the card" ng-model="selectedFlashcard.front"></textarea>
+				<textarea style="resize:none" cols="30" rows="5" placeholder="Back of the card" ng-model="selectedFlashcard.back"></textarea> 
+			</div>
+		</div>
 	</div>
 </div>
