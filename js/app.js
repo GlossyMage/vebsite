@@ -5,7 +5,7 @@ angular.module('myApp', [
 	'myApp.controllers',
 	'ui.bootstrap',
 	'ui.bootstrap.modal',
-	'ngResource',
+	'ngResource'
 ]).
 config(['$routeProvider', function($routeProvider, RestangularProvider) {
 	$routeProvider.when('/', {templateUrl: 'partials/main.html', controller: 'MainCtrl'});

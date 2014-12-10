@@ -1,16 +1,44 @@
 <div class="page-header">
-	<h1>Main page</h1>
+	<h1>{{place}}</h1>
 </div>
 
 <div class="panel panel-default">
-	<div class="panel-body">
+	<div class="panel-body" ng-show="state === 1">
+		<p>
 		One day, as you travel along the vastness of the Internet, you come
 		across a <a href="http://www.uio.no">university</a>. Wandering through
 		its halls, you eventually stumble upon a door simply labelled "vebjorrs".
 		Opening it and stepping inside, you discover a small room. Although
-		mostly featureless at present, you get the impression that this place
-		might contain some neat stuff at some point in the future. <i>Perhaps
-		returning here later would be a good idea,</i> you muse as you step back 
-		outside and continue on your journey to sites unknown.
+		sparsely furnished, the room gives off a charming homemade atmosphere.
+		You surmise that this room is the work of one spirited hobbyist,
+		rather than a group of professional code monkeys.
+		</p>
+		<p>
+		In the light of the lamp hanging from the ceiling, you see a
+		stack of flashcards lying on a table in the corner. Perhaps a
+		<label ng-click="examineTable()">closer inspection</label> is in order?
+		</p>
+		On the wall directly in front of you, you spot a note written in small
+		grey font. Taking a closer look, you see that it reads:<br/>
+		<small><font color="grey"><i>Welcome. Click on bolded text to navigate the site.</i></font></small>
+	</div>
+
+	<div class="panel-body" ng-show="state === 2">
+		<p>
+		Stepping over to the table in the corner, you discover that every single
+		card is blank. They each show signs of wear and tear, as though having
+		been used regularly, and you somehow get the feeling that there has been
+		text on them before, which for some indiscernible reason has vanished
+		without a trace.
+		</p>
+		<p>
+		With no one else nearby to take on the job of filling these flashcards,
+		it appears the task falls on your shoulders to return them to their
+		former usefulness. Producing a pen, you sit down on the kitchen chair 
+		standing neatly next to the table and
+		<label ng-click="flashcards()">get to work.</label>
+		</p>
 	</div>
 </div>
+
+<div ng-show="state !== 1"><label ng-click="goBack()">Return to main page</label>

@@ -1,9 +1,24 @@
 'use strict';
 
 angular.module('myApp.controllers', [])
-.controller('MainCtrl', function ($scope) {
-	$scope.hello = "World";
+.controller('MainCtrl', function ($scope, $location) {
 
+	$scope.state = 1;
+	$scope.place = "Main page";
+
+	$scope.examineTable = function() {
+		$scope.state = 2;
+		$scope.place = "A table in the corner";
+	};
+
+	$scope.flashcards = function() {
+		$location.path("/flashcards");
+	};
+
+	$scope.goBack = function() {
+		$scope.state = 1;
+		$scope.place = "Main page";
+	};
 })
 
 .controller('FlashCtrl', function ($scope) {
