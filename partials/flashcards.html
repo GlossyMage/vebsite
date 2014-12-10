@@ -12,76 +12,72 @@ overflow-y: scroll;
 <div class="page-header">
 	<h1>Flashcards</h1>
 </div>
-
-<div class="row">
-	<p>First, make some flashcards. Then press the button below to practice!</p>
-	<br />
-	<div class="col-sm-4" id="card-creator">
-		<div class="panel panel-default">
-			<div class="panel-heading">Flashcards</div>
-				<div class="list-group">
-					<small ng-show="flashcards.length < 1"><i>Click "Add" to make a new flashcard.</i></small>
-					<a ng-repeat="flashcard in flashcards | orderBy : 'id'"
-						class="list-group-item"
-						ng-class="{active: selectedFlashcard.id === flashcard.id}"
-						ng-click="flashcardClicked(flashcard)">
-
-						<p class="list-group-item-text">{{flashcard.name}}</p>
-					</a>
+<div class="panel panel-default">
+	<div class="panel-body">
+			<p>First, make some flashcards. Then press the button below to practice!</p>
+			<br />
+		<div class="row">
+			<div class="col-sm-4" id="card-creator">
+				<div class="panel panel-default">
+					<div class="panel-heading">Flashcards</div>
+						<div class="list-group">
+							<small ng-show="flashcards.length < 1"><i>Click "Add" to make a new flashcard.</i></small>
+							<a ng-repeat="flashcard in flashcards | orderBy : 'id'"
+								class="list-group-item"
+								ng-class="{active: selectedFlashcard.id === flashcard.id}"
+								ng-click="flashcardClicked(flashcard)">
+		
+								<p class="list-group-item-text">{{flashcard.name}}</p>
+							</a>
+						</div>
 				</div>
-		</div>
-		<div class="btn-group" role="group" aria-label="...">
-			<button class="btn btn-default" type="button" ng-click="createFlashcard()">Add</button>
-			<button class="btn btn-default" type="button" ng-click="deleteFlashcard()">Delete</button>
-		</div>
-	</div>
-	<div class="col-sm-6">
-		<div class="panel panel-default">
-			<div class="panel-heading">Details</div>
-			<div class="input-group">
-				<span class="input-group-addon"></span>
-				<input type="text" class="form-control" placeholder="Flashcard name" ng-model="selectedFlashcard.name" />
+				<div class="btn-group" role="group" aria-label="...">
+					<button class="btn btn-default" type="button" ng-click="createFlashcard()">Add</button>
+					<button class="btn btn-default" type="button" ng-click="deleteFlashcard()">Delete</button>
+				</div>
 			</div>
-			<div class="panel-body">
-				<textarea style="resize:none" cols="30" rows="5" placeholder="Front of the card" ng-model="selectedFlashcard.front"></textarea>
-				<textarea style="resize:none" cols="30" rows="5" placeholder="Back of the card" ng-model="selectedFlashcard.back"></textarea> 
+			<div class="col-sm-6">
+				<div class="panel panel-default">
+					<div class="panel-heading">Details</div>
+					<div class="input-group">
+						<span class="input-group-addon"></span>
+						<input type="text" class="form-control" placeholder="Flashcard name" ng-model="selectedFlashcard.name" />
+					</div>
+					<div class="panel-body">
+						<textarea style="resize:none" cols="30" rows="5" placeholder="Front of the card" ng-model="selectedFlashcard.front"></textarea>
+						<textarea style="resize:none" cols="30" rows="5" placeholder="Back of the card" ng-model="selectedFlashcard.back"></textarea> 
+					</div>
+				</div>
 			</div>
+		</div>
+	
+		<div ng-controller="ModalCtrl">
+			<script type="text/ng-template" id="flashmodalcontent.html">
+				<div class="modal-header">
+					<h3 class="modal-title">Flashcards</h3>
+				</div>
+				<div class="modal-body">
+					<div ng-show="stage === 1">
+						<h3>{{selectedFlashcard.name}} - {{selectedFlashcard.front}}</h3>
+						<br />
+						<textarea style="resize:none" cols="30" rows="5" placeholder="What is on the back of this card?" ng-model="selectedFlashcard.answer"></textarea>
+						<br />
+						<button class="btn btn-default" ng-click="submit(answer)">Submit</button>
+					</div>
+					<div ng-show="stage === 2">
+						<h3 ng-show="success">Correct!</h3>
+						<h3 ng-show="!success">Wrong. The answer is {{selectedFlashcard.back}}.</h3>
+						<button class="btn btn-default" ng-click="again()">Again?</button>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" ng-click="close()">Close</button>
+				</div>
+			</script>
+			<hr />
+			<button class="btn btn-primary" ng-click="open()">Practice</button>
 		</div>
 	</div>
 </div>
-
-<div ng-controller="ModalCtrl">
-	<script type="text/ng-template" id="flashmodalcontent.html">
-		<div class="modal-header">
-			<h3 class="modal-title">Flashcards</h3>
-		</div>
-		<div class="modal-body">
-			<div ng-show="stage === 1">
-				<h3>{{selectedFlashcard.name}} - {{selectedFlashcard.front}}</h3>
-				<br />
-				<textarea style="resize:none" cols="30" rows="5" placeholder="What is on the back of this card?" ng-model="selectedFlashcard.answer"></textarea>
-				<br />
-				<button class="btn btn-default" ng-click="submit(answer)">Submit</button>
-			</div>
-			<div ng-show="stage === 2">
-				<h3 ng-show="success">Correct!</h3>
-				<h3 ng-show="!success">Wrong. The answer is {{selectedFlashcard.back}}.</h3>
-				<button class="btn btn-default" ng-click="again()">Again?</button>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button class="btn btn-default" ng-click="close()">Close</button>
-		</div>
-	</script>
-	<hr />
-	<button class="btn btn-primary" ng-click="open()">Practice</button>
-</div>
-
-
-
-
-
-
-
-
+<small><label ng-click="mainPage()">Return to main page</label></small>
 
