@@ -21,7 +21,7 @@ angular.module('myApp.controllers', [])
 	};
 })
 
-.controller('FlashCtrl', function ($scope) {
+.controller('FlashCtrl', function ($scope, $location) {
 
 	// Array Remove - authored by John Resig (MIT Licensed)
 	Array.prototype.remove = function(from, to) {
@@ -73,6 +73,9 @@ angular.module('myApp.controllers', [])
 		$scope.selectedFlashcard = index > 0 ? $scope.flashcards[index-1] : $scope.flashcards[index];
 	};
 
+	$scope.mainPage = function() {
+		$location.path("/");
+	}
 })
 
 .controller('ModalCtrl', function($scope, $modal) {
