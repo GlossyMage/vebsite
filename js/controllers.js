@@ -116,15 +116,39 @@ angular.module('myApp.controllers', [])
 	$scope.selectedFlashcard = selectedFlashcard;
 	$scope.stage = 1;
 	$scope.success = false;
+	$scope.answers = 0;
+	$scope.correctAnswers = 0;
+	$scope.lastHundredAnswers = [];
 
 	$scope.submit = function() {
+		if ($scope.lastTwentyAnswers.length >= 100) {
+			$scope.lastTwentyAnswers.remove(-1);
+		}
 		if ($scope.selectedFlashcard.answer === $scope.selectedFlashcard.back) {
 			$scope.success = true;
+			$scope.correctAnswers++;
 		} else {
 			$scope.success = false;
 		}
+
+		$scope.lastTwentyAnswers.unshift($scope.success);
 		$scope.selectedFlashcard.answer = "";
+		$scope.answers++;
+		
 		$scope.stage = 2;
+	}
+
+	$scope.suffixPercentCorrect = function(limit) {
+		var max = limit < $scope.lastHundredAnswers.length ? limit : $scope.lastHundredAnswers.length;
+		var correct = 0;
+		
+		for (var i = 0; i < max; i++) {
+			if ($scope.lastHundredAnswers[i]) {
+				correct++;
+			}
+		}
+
+		return (correct / max) * 100;
 	}
 
 	$scope.again = function() {
