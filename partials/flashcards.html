@@ -67,6 +67,8 @@ overflow-y: scroll;
 					<div ng-show="stage === 2">
 						<h3 ng-show="success">Correct!</h3>
 						<h3 ng-show="!success">Wrong. The answer is {{selectedFlashcard.back}}.</h3>
+						<p>Percentage of correct answers (last 10): {{suffixPercentCorrect(10)}}<br />
+						Percentage of correct answers (total): {{correctAnswers / answers * 100}}</p>
 						<button class="btn btn-default" ng-click="again()">Again?</button>
 					</div>
 				</div>
