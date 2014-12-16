@@ -121,8 +121,8 @@ angular.module('myApp.controllers', [])
 	$scope.lastHundredAnswers = [];
 
 	$scope.submit = function() {
-		if ($scope.lastTwentyAnswers.length >= 100) {
-			$scope.lastTwentyAnswers.remove(-1);
+		if ($scope.lastHundredAnswers.length >= 100) {
+			$scope.lastHundredAnswers.remove(-1);
 		}
 		if ($scope.selectedFlashcard.answer === $scope.selectedFlashcard.back) {
 			$scope.success = true;
@@ -131,7 +131,7 @@ angular.module('myApp.controllers', [])
 			$scope.success = false;
 		}
 
-		$scope.lastTwentyAnswers.unshift($scope.success);
+		$scope.lastHundredAnswers.unshift($scope.success);
 		$scope.selectedFlashcard.answer = "";
 		$scope.answers++;
 		
