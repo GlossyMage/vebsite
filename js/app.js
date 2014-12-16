@@ -7,7 +7,7 @@ angular.module('myApp', [
 	'ui.bootstrap.modal',
 	'ngResource'
 ]).
-config(function($routeProvider, $locationProvider, RestangularProvider) {
+config(function($routeProvider, $locationProvider) {
 
 	$routeProvider.when('/', {templateUrl: 'partials/main.html', controller: 'MainCtrl'});
 	$routeProvider.when('/main', {redirectTo: '/'});
@@ -17,4 +17,4 @@ config(function($routeProvider, $locationProvider, RestangularProvider) {
 	$routeProvider.otherwise({redirectTo: '/404'});
 
 	$locationProvider.html5Mode(true);
-}]);
+});
